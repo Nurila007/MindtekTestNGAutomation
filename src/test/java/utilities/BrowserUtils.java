@@ -2,6 +2,7 @@ package utilities;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -45,6 +46,19 @@ public class BrowserUtils {
 
     }
 
+    /**
+     * This method will wait until element  is  clickable
+     * Ex:
+     *      .waitElementToBeClickable(element); --> returns element;
+     */
+
+    public static WebElement waitElementToBeClickable(WebElement element){
+        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        WebElement element1 = wait.until(ExpectedConditions.elementToBeClickable(element));
+        return element1;
+    }
+
     /*
     this method will wait untill element will clickable
     *Ex;--> .waitElementToBeClickable(element);-->return element;
@@ -66,7 +80,19 @@ public class BrowserUtils {
         WebDriver driver=Driver.getDriver();
         JavascriptExecutor js=((JavascriptExecutor)driver);
         js.executeScript("window.scrollBy(0,"+pixels+")");
-        
+
+    }
+
+    /*
+    this method will hover over to element in browser, it means move your mouse to that element but without clicking
+
+   *ex;--> .hoverOver(element);
+     */
+
+    public static void hoverOver(WebElement element){
+
+        Actions actions= new Actions(Driver.getDriver());
+        actions.moveToElement(element).perform();
     }
 
 
